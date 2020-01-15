@@ -1,17 +1,24 @@
-# Welcome to MkDocs
+# Gene Set Analysis Matlab (GSAM)
 
-For full documentation visit [mkdocs.org](https://mkdocs.org).
+Gene set analysis (GSA) and visualization of results.
 
-## Commands
+## Main functions
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+* `geneSetAnalysis` - Run a gene set analysis (GSA).
+* `importGSC` - Import gene set collection (GSC) from a [.gmt](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#GMT:_Gene_Matrix_Transposed_file_format_.28.2A.gmt.29) file.
+* `extractMetaboliteGSC` - Extract metabolite gene sets from a genome-scale model.
+* `extractSubsystemGSC` - Extract subsystem gene sets from a genome-scale model.
 
-## Project layout
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## Citation
+
+_Manuscript in preparation._
+
+
+
+
+
+
+
+
+
