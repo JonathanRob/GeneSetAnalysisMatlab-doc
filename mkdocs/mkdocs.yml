@@ -1,6 +1,5 @@
-site_name: My site
+site_name: Gene Set Analysis Matlab
 nav:
     - Home: index.md
-    - About: about.md
 theme: readthedocs
 
