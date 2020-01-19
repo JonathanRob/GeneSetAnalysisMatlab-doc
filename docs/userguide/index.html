@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>User guide - Gene Set Analysis Matlab</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "User guide";
+    var mkdocs_page_input_path = "userguide.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/matlab.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Gene Set Analysis Matlab</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Overview</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">User guide</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#gsam-user-guide">GSAM User Guide</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#example-1-single-gsa-liver-hepatocellular-carcinoma">Example 1: Single GSA, Liver hepatocellular carcinoma</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Gene Set Analysis Matlab</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>User guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="gsam-user-guide">GSAM User Guide</h1>
+<p>The following examples demonstrate the use of the GSAM package for common analysis scenarios.</p>
+<p>The data files used for these examples can be retrieved from the <code>data/</code> directory on the associated <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab-doc/tree/master/data">documentation repository</a>. If you wish you run these examples yourself, first download the files in that directory to your local machine and ensure that they are on your current MATLAB path.</p>
+<h2 id="example-1-single-gsa-liver-hepatocellular-carcinoma">Example 1: Single GSA, Liver hepatocellular carcinoma</h2>
+<h3 id="load-the-data-and-gene-set-collection-file">Load the data and gene set collection file</h3>
+<p>Load the differential expression (DE) results for hepatocellular carcinoma (LIHC) (paired-normal tissue vs. primary tumor tissue).</p>
+<pre><code class="matlab">DEdata = readtable('DEresults_LIHC.txt');
+</code></pre>
+
+<p>Take a look at the table contents.</p>
+<pre><code class="matlab">head(DEdata)
+
+% ans =
+% 
+%   8×4 table
+% 
+%          gene_IDs           gene_names       logFC         PValue  
+%     ___________________    ____________    __________    __________
+% 
+%     {'ENSG00000000003'}    {'TSPAN6'  }      -0.26345      0.050906
+%     {'ENSG00000000419'}    {'DPM1'    }    -0.0030857       0.97084
+%     {'ENSG00000000457'}    {'SCYL3'   }      0.044663       0.63024
+%     {'ENSG00000000460'}    {'C1orf112'}        0.7297    0.00021919
+%     {'ENSG00000000938'}    {'FGR'     }       -1.2409    3.6644e-15
+%     {'ENSG00000000971'}    {'CFH'     }      -0.72639    0.00069828
+%     {'ENSG00000001036'}    {'FUCA2'   }      0.050749       0.66557
+%     {'ENSG00000001084'}    {'GCLC'    }      -0.60349    1.1461e-06
+</code></pre>
+
+<p>Extract the data into individual variables</p>
+<pre><code class="matlab">geneIDs   = DEdata.gene_IDs;     % gene Ensembl IDs
+geneNames = DEdata.gene_names;   % gene abbreviations
+log2FC    = DEdata.logFC;        % log2(fold-changes) (normal vs. tumor)
+pvals     = DEdata.PValue;       % fold-change significance (p-values)
+</code></pre>
+
+<p>Load the <code>KEGG_GSC.gmt</code> gene set collection (GSC) file using the <code>importGSC</code> function, and look at the first few lines to see how it's formatted.</p>
+<pre><code class="matlab">gsc = importGSC('KEGG_GSC.gmt');
+gsc(1:5,:)
+
+% ans =
+%
+%   5×2 cell array
+%
+%     {'KEGG-GLYCOLYSIS-GLUCONEOGENESIS'}    {'ACSS2'}
+%     {'KEGG-GLYCOLYSIS-GLUCONEOGENESIS'}    {'GCK'  }
+%     {'KEGG-GLYCOLYSIS-GLUCONEOGENESIS'}    {'PGK2' }
+%     {'KEGG-GLYCOLYSIS-GLUCONEOGENESIS'}    {'PGK1' }
+%     {'KEGG-GLYCOLYSIS-GLUCONEOGENESIS'}    {'PDHB' }
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>KEGG_custom_GSC.gmt</code> file used in this example is a modified version of the KEGG gene set collection retrieved from <a href="http://software.broadinstitute.org/gsea/msigdb/genesets.jsp?collection=CP:KEGG">MSigDB</a>, where all disease-related gene sets were removed.</p>
+</div>
+<p>Run the gene set analysis using the <code>geneSetAnalysis</code> function.</p>
+<pre><code class="matlab">GSAres = geneSetAnalysis(geneNames, pvals, log2FC, gsc, 'Wilcoxon', 50000, [20, Inf]);
+
+% Gene set collection contains 146 gene sets and 4966 unique genes.
+% Checking for empty gene sets... Removed 0 empty sets.
+% Checking for duplicated rows in GSC... Removed 0 duplicated rows.
+% Checking gene set sizes... Removed 27 gene sets not satisfying size limits.
+% Final number of gene sets remaining: 119
+% Subsetting data for mixed-directional calculations... Done.
+% Calculating test statistic... Done.
+% Calculating significance via gene shuffling... Done.
+</code></pre>
+
+<p>Here, we chose the Wilcoxon rank-sum test as the method for combining gene-level statistics, set the number of permutations for significance calculation to 50000, and excluded gene sets that contained less than 20 genes.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>We used <code>geneNames</code> (instead of e.g. <code>geneIDs</code>) as input to the <code>geneSetAnalysis</code> function because gene names are used in the <code>gsc</code> that was loaded. It is important that the gene names or IDs in the gene list are of the same type as those used in the GSC file.</p>
+</div>
+<p>Generate a heatmap to visualize the GSA results using the <code>GSAheatmap</code> function.</p>
+<pre><code class="matlab">GSAheatmap(GSAres, true, 'pval', 0.01);
+</code></pre>
+
+<p><img alt="LIHC GSA heatmap" src="../img/GSAheatmap_LIHC.png" /></p>
+<p>Here, we chose to use the adjusted gene-set p-values (as specified with the second input <code>true</code>), and filtered the gene sets to only show those with an adjusted p-value ≤ 0.01 for at least one of the five directionality types.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more information on the meaning and interpretation of the different p-value classes (distinct directional down and up, mixed-directinal down and up, and non-directional), see the <a href="https://www.ncbi.nlm.nih.gov/pubmed/23444143">publication</a> where they were introduced. </p>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href=".." class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

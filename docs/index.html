@@ -8,7 +8,7 @@
   <meta name="description" content="None">
   
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Home - My site</title>
+  <title>Overview - Gene Set Analysis Matlab</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Home";
+    var mkdocs_page_name = "Overview";
     var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = null;
   </script>
@@ -25,6 +25,7 @@
   <script src="js/jquery-2.1.1.min.js" defer></script>
   <script src="js/modernizr-2.8.3.min.js" defer></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/matlab.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,7 +37,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> My site</a>
+        <a href="." class="icon icon-home"> Gene Set Analysis Matlab</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -50,16 +51,16 @@
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href=".">Home</a>
+    <a class="current" href=".">Overview</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#welcome-to-mkdocs">Welcome to MkDocs</a></li>
+    <li class="toctree-l2"><a href="#gene-set-analysis-matlab-gsam">Gene Set Analysis Matlab (GSAM)</a></li>
     
         <ul>
         
-            <li><a class="toctree-l3" href="#commands">Commands</a></li>
+            <li><a class="toctree-l3" href="#main-functions">Main functions</a></li>
         
-            <li><a class="toctree-l3" href="#project-layout">Project layout</a></li>
+            <li><a class="toctree-l3" href="#citation">Citation</a></li>
         
         </ul>
     
@@ -69,7 +70,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="about/">About</a>
+    <a class="" href="userguide/">User guide</a>
 	    </li>
           
         </ul>
@@ -82,7 +83,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">My site</a>
+        <a href=".">Gene Set Analysis Matlab</a>
       </nav>
 
       
@@ -94,7 +95,7 @@
     
       
     
-    <li>Home</li>
+    <li>Overview</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -104,21 +105,17 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+                <h1 id="gene-set-analysis-matlab-gsam">Gene Set Analysis Matlab (GSAM)</h1>
+<p>Gene set analysis (GSA) and visualization of results. This package was inspired by (and based on) the <a href="https://bioconductor.org/packages/release/bioc/html/piano.html">Piano package</a> for R, which I highly recommend.</p>
+<h2 id="main-functions">Main functions</h2>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
+<li><code>geneSetAnalysis</code> - Run a gene set analysis (GSA).</li>
+<li><code>importGSC</code> - Import gene set collection (GSC) from a <a href="https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#GMT:_Gene_Matrix_Transposed_file_format_.28.2A.gmt.29">.gmt</a> file.</li>
+<li><code>extractMetaboliteGSC</code> - Extract metabolite gene sets from a genome-scale model.</li>
+<li><code>extractSubsystemGSC</code> - Extract subsystem gene sets from a genome-scale model.</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<h2 id="citation">Citation</h2>
+<p><em>Manuscript in preparation.</em></p>
               
             </div>
           </div>
@@ -126,7 +123,7 @@ docs/
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="userguide/" class="btn btn-neutral float-right" title="User guide">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -154,7 +151,7 @@ docs/
       
       
       
-        <span style="margin-left: 15px"><a href="about/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="userguide/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -167,5 +164,5 @@ docs/
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2020-01-14 10:21:03
+Build Date UTC : 2020-01-19 08:04:24
 -->
