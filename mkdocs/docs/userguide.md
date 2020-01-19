@@ -45,6 +45,9 @@ pvals     = DEdata.PValue;       % fold-change significance (p-values)
 Load the `KEGG_GSC.gmt` gene set collection (GSC) file using the `importGSC` function, and look at the first few lines to see how it's formatted.
 ```matlab
 gsc = importGSC('KEGG_GSC.gmt');
+
+% Gene set collection contains 146 gene sets and 4966 unique genes.
+
 gsc(1:5,:)
 
 % ans =
@@ -79,7 +82,23 @@ Here, we chose the Wilcoxon rank-sum test as the method for combining gene-level
 !!! important
 	We used `geneNames` (instead of e.g. `geneIDs`) as input to the `geneSetAnalysis` function because gene names are used in the `gsc` that was loaded. It is important that the gene names or IDs in the gene list are of the same type as those used in the GSC file.
 
-Generate a heatmap to visualize the GSA results using the `GSAheatmap` function.
+
+
+The results are returned as the `GSAres` table, which contains information about the size (number of genes) and significance (p-values, raw and adjusted) for each of the evaluated gene sets. The table can be viewed by double-clicking on `GSAres` in the Workspace, or using the `open` function.
+```matlab
+open('GSAres');
+```
+
+| GS_name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | GS_size | stat_nondir | p_nondir | padj_nondir | stat_mixup | p_mixup | padj_mixup | stat_mixdn | p_mixdn | padj_mixdn | stat_distup | p_distup | padj_distup | stat_distdn | p_distdn | padj_distdn |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| KEGG-GLYCOLYSIS-GLUCONEOGENESIS | 51 | 519848 | 0.0102 | 0.0371 | 62259 | 0.5766 | 0.8788 | 196844 | 0.0018 | 0.0092 | 302878 | 0.9998 | 1 | 571415 | 0.00018 | 0.00067 |
+| KEGG-CITRATE-CYCLE-TCA-CYCLE | 30 | 294717 | 0.0832 | 0.1799 | 44790 | 0.3987 | 0.8041 | 101736 | 0.0759 | 0.1966 | 200384 | 0.9817 | 1 | 313906 | 0.0183 | 0.0496 |
+| KEGG-PENTOSE-PHOSPHATE-PATHWAY | 21 | 198224 | 0.2115 | 0.3872 | 47870 | 0.2579 | 0.6929 | 51476 | 0.3019 | 0.5239 | 176522 | 0.5622 | 1 | 183481 | 0.4379 | 0.6596 |
+| KEGG-PENTOSE-AND-GLUCURONATE-INTERCONVERSIONS | 21 | 189170 | 0.3415 | 0.5080 | 8507 | 0.8360 | 0.9871 | 84792 | 0.2356 | 0.4344 | 103850 | 0.9998 | 1 | 256153 | 0.0002 | 0.0007 |
+| KEGG-FRUCTOSE-AND-MANNOSE-METABOLISM | 32 | 278495 | 0.4365 | 0.6076 | 74220 | 0.2803 | 0.6948 | 65609 | 0.6202 | 0.8317 | 283091 | 0.3800 | 1 | 265485 | 0.6201 | 0.8580 |
+
+
+The tabular format of the GSA results can often be difficult to interpret. A more intuitive way to visualize the results is to use a heatmap. Generate a heatmap to visualize `GSAres` using the `GSAheatmap` function.
 ```matlab
 GSAheatmap(GSAres, true, 'pval', 0.01);
 ```
