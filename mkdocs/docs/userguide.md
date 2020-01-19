@@ -109,6 +109,11 @@ Here, we chose to use the adjusted gene-set p-values (as specified with the seco
 !!! note
 	For more information on the meaning and interpretation of the different p-value classes (distinct directional down and up, mixed-directinal down and up, and non-directional), see the [publication](https://www.ncbi.nlm.nih.gov/pubmed/23444143) where they were introduced. 
 
+Alternatively, the results can be written to a file.
+```matlab
+writetable(GSAres,'GSAresults.txt','Delimiter','\t');  % export to tab-delimited .txt file
+writetable(GSAres,'GSAresults.csv','Delimiter',',');  % export to comma-delimited .csv file
+```
 
 
 
