@@ -1,5 +1,12 @@
 site_name: Gene Set Analysis Matlab
 nav:
-    - Home: index.md
-theme: readthedocs
+  - Overview: index.md
+  - User guide: userguide.md
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - matlab
+markdown_extensions:
+  - admonition
 
