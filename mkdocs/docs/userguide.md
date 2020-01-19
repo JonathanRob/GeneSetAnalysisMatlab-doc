@@ -64,6 +64,9 @@ gsc(1:5,:)
 !!! note
 	The `KEGG_custom_GSC.gmt` file used in this example is a modified version of the KEGG gene set collection retrieved from [MSigDB](http://software.broadinstitute.org/gsea/msigdb/genesets.jsp?collection=CP:KEGG), where all disease-related gene sets were removed.
 
+
+### Run the gene set analysis
+
 Run the gene set analysis using the `geneSetAnalysis` function.
 ```matlab
 GSAres = geneSetAnalysis(geneNames, pvals, log2FC, gsc, 'Wilcoxon', 50000, [20, Inf]);
@@ -83,6 +86,7 @@ Here, we chose the Wilcoxon rank-sum test as the method for combining gene-level
 	We used `geneNames` (instead of e.g. `geneIDs`) as input to the `geneSetAnalysis` function because gene names are used in the `gsc` that was loaded. It is important that the gene names or IDs in the gene list are of the same type as those used in the GSC file.
 
 
+### View and/or export the results
 
 The results are returned as the `GSAres` table, which contains information about the size (number of genes) and significance (p-values, raw and adjusted) for each of the evaluated gene sets. The table can be viewed by double-clicking on `GSAres` in the Workspace, or using the `open` function.
 ```matlab
