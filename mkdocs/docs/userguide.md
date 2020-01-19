@@ -100,6 +100,7 @@ open('GSAres');
 | KEGG-PENTOSE-PHOSPHATE-PATHWAY | 21 | 198224 | 0.2115 | 0.3872 | 47870 | 0.2579 | 0.6929 | 51476 | 0.3019 | 0.5239 | 176522 | 0.5622 | 1 | 183481 | 0.4379 | 0.6596 |
 | KEGG-PENTOSE-AND-GLUCURONATE-INTERCONVERSIONS | 21 | 189170 | 0.3415 | 0.5080 | 8507 | 0.8360 | 0.9871 | 84792 | 0.2356 | 0.4344 | 103850 | 0.9998 | 1 | 256153 | 0.0002 | 0.0007 |
 | KEGG-FRUCTOSE-AND-MANNOSE-METABOLISM | 32 | 278495 | 0.4365 | 0.6076 | 74220 | 0.2803 | 0.6948 | 65609 | 0.6202 | 0.8317 | 283091 | 0.3800 | 1 | 265485 | 0.6201 | 0.8580 |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
 
 The tabular format of the GSA results can often be difficult to interpret. A more intuitive way to visualize the results is to use a heatmap. Generate a heatmap to visualize `GSAres` using the `GSAheatmap` function.
