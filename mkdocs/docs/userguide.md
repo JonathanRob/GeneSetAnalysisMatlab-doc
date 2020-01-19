@@ -120,6 +120,41 @@ writetable(GSAres,'GSAresults.csv','Delimiter',',');  % export to comma-delimite
 ```
 
 
+## Example 2: Using gene set collections derived from GEMs
+
+Genome-scale metabolic models (GEMs) are convenient collections of all known reactions comprising the metabolism of an organism or cell type. Since most GEMs contain gene information, we can extract gene set collections from the associations of these genes with other model components, such as metabolites or subsystems (pathways).
+
+### Load the GEM and extract some GSCs
+
+For this example, we will use a human genome-scale metabolic model, Human-GEM. A `.mat` version of the model can be retrieved from the [Human-GEM GitHub repository](https://github.com/SysBioChalmers/Human-GEM/tree/master/ModelFiles/mat).
+
+Once the `HumanGEM.mat` file is downloaded and added to the current working folder (or somewhere else on the MATLAB path), load it into MATLAB.
+```matlab
+load('HumanGEM.mat');  % the model is loaded as a structure named 'ihuman'
+```
+
+Extract a metabolite-based GSC from the model using the `extractMetaboliteGSC` function.
+```matlab
+gsc_met = extractMetaboliteGSC(ihuman);
+
+% Gene set collection contains 3715 gene sets and 3625 unique genes.
+```
+
+Just as other GSCs (such as the KEGG collection described above) associate biological functions or processes to sets of genes, the metabolite GSC associates metabolites to sets of genes. This provides a convenient link between gene-level information and metabolism.
+
+Run a GSA with the same LIHC DE data as in Example 1 above, but now using the metabolite GSC `gsc_met`. We will also change the gene set size limits to exclude metabolites associated with more than 200 genes, and use the ["Reporter" method](https://www.pnas.org/content/102/8/2685) for combining gene-level statistics.
+
+```matlab
+GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_met, 'Reporter', 50000, [20, 200]);
+
+% Checking for empty gene sets... Removed 71 empty sets.
+% Checking for duplicated rows in GSC... Removed 0 duplicated rows.
+% Checking gene set sizes... Removed 3236 gene sets not satisfying size limits.
+% Final number of gene sets remaining: 408
+% Subsetting data for mixed-directional calculations... Done.
+% Calculating test statistic... Done.
+% Calculating significance via gene shuffling... Done.
+```
 
 
 
