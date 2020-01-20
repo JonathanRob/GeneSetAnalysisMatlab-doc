@@ -125,7 +125,7 @@ writetable(GSAres,'GSAresults.csv','Delimiter',',');  % export to comma-delimite
 
 Genome-scale metabolic models (GEMs) are convenient collections of all known reactions comprising the metabolism of an organism or cell type. Since most GEMs contain gene information, we can extract gene set collections from the associations of these genes with other model components, such as metabolites or subsystems (pathways).
 
-### Load the GEM and extract some GSCs
+### Extract and use a metabolite-based GSC
 
 For this example, we will use a human genome-scale metabolic model, Human-GEM. A `.mat` version of the model can be retrieved from the [Human-GEM GitHub repository](https://github.com/SysBioChalmers/Human-GEM/tree/master/ModelFiles/mat).
 
@@ -143,7 +143,17 @@ gsc_met = extractMetaboliteGSC(ihuman);
 
 Just as other GSCs (such as the KEGG collection described above) associate biological functions or processes to sets of genes, the metabolite GSC associates metabolites to sets of genes. This provides a convenient link between gene-level information and metabolism.
 
-Run a GSA with the same LIHC DE data as in Example 1 above, but now using the metabolite GSC `gsc_met`. We will also change the gene set size limits to exclude metabolites associated with more than 200 genes, and use the ["Reporter" method](https://www.pnas.org/content/102/8/2685) for combining gene-level statistics.
+Use the same LIHC DE data as was used in Example 1 above:
+```matlab
+DEdata = readtable('DEresults_LIHC.txt');
+
+geneIDs   = DEdata.gene_IDs;
+geneNames = DEdata.gene_names;
+log2FC    = DEdata.logFC;
+pvals     = DEdata.PValue;
+```
+
+Run a GSA with the LIHC DE data, now using the metabolite GSC `gsc_met`.
 
 ```matlab
 GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_met, 'Reporter', 50000, [20, 200]);
@@ -156,6 +166,66 @@ GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_met, 'Reporter', 50000, [20
 % Calculating test statistic... Done.
 % Calculating significance via gene shuffling... Done.
 ```
+
+!!! note
+	This approach of using metabolite-based gene sets with the "reporter" method for combining gene-level statistics is termed [*reporter metabolite analysis*](https://www.pnas.org/content/102/8/2685).
+
+!!! important
+	Notice that we used the `geneIDs` here instead of `geneNames`. This is because the Human-GEM model by default uses gene Ensembl IDs, which means the `gsc_met` will also contain Ensembl IDs. Try running the GSA using `geneNames` instead - you should see an error.
+
+The results can again be visualized using the `GSAheatmap` function. Since a very large number of gene sets in this example exhibit a low p-value (e.g., < 0.001) we use the `top each` option to only include the top 10 most significant gene sets for each p-value type in the heatmap.
+```matlab
+GSAheatmap(GSAres, true, 'top each', 10, 5);
+```
+
+Note that we set the `colorMax` input to 5 to prevent the color range from autoscaling to the maximum -log10(p-value), resulting in very faint colors for most gene sets.
+
+
+### Extract and use a subsystem-based GSC
+
+In the same way that a metabolite-based GSC can be extracted from a genome-scale model, we can generate a subsystem-based GSC:
+
+```matlab
+gsc_subsys = extractSubsystemGSC(ihuman);
+```
+
+Subsystems are groups of reactions forming a pathway or sharing a common metabolic function. A few examples can be seen from `gsc_subsys`:
+
+```matlab
+subsystem_list = unique(gsc_subsys);
+subsystem_list(1:5)
+
+% ans =
+% 
+%   5×1 cell array
+% 
+%     {'Acyl-CoA hydrolysis'                        }
+%     {'Acylglycerides metabolism'                  }
+%     {'Alanine, aspartate and glutamate metabolism'}
+%     {'Amino sugar and nucleotide sugar metabolism'}
+%     {'Aminoacyl-tRNA biosynthesis'                }
+```
+
+Run a GSA on the LIHC DE results with the same settings as above, but now using `gsc_subsys`.
+```matlab
+GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_subsys, 'Reporter', 50000, [20, 200]);
+```
+
+Visualize the results with a heatmap, filtering based on (adjusted) p-values.
+```matlab
+GSAheatmap(GSAres, true, 'pval', 0.05, 5);
+```
+
+
+## Example 3: Combining the results of multiple GSAs
+
+*coming soon...*
+
+
+
+
+
+
 
 
 
