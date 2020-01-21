@@ -1,6 +1,6 @@
 # Gene Set Analysis Matlab (GSAM)
 
-![logo](img/logo.svg)
+![logo](img/logo.png)
 
 Gene set analysis (GSA) and visualization of results. This package was inspired by (and based on) the [Piano package](https://bioconductor.org/packages/release/bioc/html/piano.html) for R, which I highly recommend.
 
