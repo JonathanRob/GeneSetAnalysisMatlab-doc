@@ -421,7 +421,98 @@ subsystem_list(1:5)
 </code></pre>
 
 <h2 id="example-3-combining-the-results-of-multiple-gsas">Example 3: Combining the results of multiple GSAs</h2>
-<p><em>coming soon...</em></p>
+<p>In some cases we have multiple sets of p-values and fold-changes from multiple DE analyses, and may want to compare the GSA results among these data sets. Both the <code>geneSetAnalysis</code> and <code>GSAheatmap</code> functions allow input of multiple datasets or results.</p>
+<p>We will demonstrate two example approaches for running and comparing multiple GSAs which yield the same result. The examples will use the metabolite GSC from the Human-GEM model, and the "Reporter" method for combining statistics. Both approaches begin with the same steps of loading a GSC and specifying the list of dataset files:</p>
+<pre><code class="matlab">% extract a metabolite GSC (see Example 2 for more detail)
+load('HumanGEM.mat');
+gsc_met = extractMetaboliteGSC(ihuman);
+</code></pre>
+
+<pre><code class="matlab">% specify list of DE data files to analyze
+cancer_types = {'COAD'; 'KIRC'; 'LIHC'; 'STAD'};
+fnames = strcat('DEresults_', cancer_types, '.txt');
+
+% fnames =
+% 
+%   4×1 cell array
+% 
+%     {'DEresults_COAD.txt'}
+%     {'DEresults_KIRC.txt'}
+%     {'DEresults_LIHC.txt'}
+%     {'DEresults_STAD.txt'}
+</code></pre>
+
+<h3 id="run-multiple-gsas-separately-and-combine-the-results">Run multiple GSAs separately and combine the results</h3>
+<p>One approach is to run each GSA separately (e.g., in a for-loop), and then combine the results before calling the <code>GSAheatmap</code> function.</p>
+<pre><code class="matlab">% load and analyze each dataset individually
+for i = 1:numel(fnames)
+    DEdata = readtable(fnames{i});
+    GSAres{i} = geneSetAnalysis(DEdata.gene_IDs, DEdata.PValue, DEdata.logFC, ...
+        gsc_met, 'Reporter', 10000, [20, 200]);
+    GSAres{i}.Properties.Description = cancer_types{i};  % label the table as the cancer type
+end
+</code></pre>
+
+<h3 id="run-multiple-gsas-together-in-one-function-call">Run multiple GSAs together in one function call</h3>
+<p>Another approach is to first combine the datasets, and then supply the combined data to the <code>geneSetAnalysis</code> function.</p>
+<pre><code class="matlab">% load and combine datasets into cell arrays
+for i = 1:numel(fnames)
+    DEdata = readtable(fnames{i});
+    logFC{i} = DEdata.logFC;
+    PValue{i} = DEdata.PValue;
+    genes{i} = DEdata.gene_IDs;
+end
+
+% run the GSA
+GSAres = geneSetAnalysis(genes, PValue, logFC, gsc_met, 'Reporter', ...
+    10000, [20, 200], 'p', cancer_types);
+
+
+% ##### Running GSA on COAD (run 1 of 4) #####
+% 
+% Checking for empty gene sets... Removed 106 empty sets.
+% Checking for duplicated rows in GSC... Removed 0 duplicated rows.
+% Checking gene set sizes... Removed 3250 gene sets not satisfying size limits.
+% Final number of gene sets remaining: 359
+% Subsetting data for mixed-directional calculations... Done.
+% Calculating test statistic... Done.
+% Calculating significance via gene shuffling... Done.
+%
+%
+% ##### Running GSA on KIRC (run 2 of 4) #####
+% 
+% Checking for empty gene sets... Removed 63 empty sets.
+% Checking for duplicated rows in GSC... Removed 0 duplicated rows.
+% Checking gene set sizes... Removed 3288 gene sets not satisfying size limits.
+% Final number of gene sets remaining: 364
+% Subsetting data for mixed-directional calculations... Done.
+% Calculating test statistic... Done.
+% Calculating significance via gene shuffling... Done.
+% 
+% ...
+</code></pre>
+
+<p>Note that in this second approach, we supplied the dataset names <code>cancer_types</code> as input to the <code>geneSetAnalysis</code> function.</p>
+<h3 id="generate-multi-gsa-heatmaps">Generate multi-GSA heatmaps</h3>
+<p>Both the above approaches should yield essentially the same <code>GSAres</code> result (though not identical because of stochasticity). To visualize the results of the multiple GSAs in the same plot, the <code>GSAheatmap</code> function can be used.</p>
+<p>Here we choose to show the top 10 most significant gene sets (metabolites) from each dataset, and to scale the colorbar to a maximum -log<sub>10</sub>(p-value) of 5.</p>
+<pre><code class="matlab">GSAheatmap(GSAres, true, 'top each', 10, 5);
+
+% Warning! The following gene sets are not present in all GSAres tables and will therefore be ignored:
+%   1,2-diacylglycerol-LD-SM pool
+%   1-(1-alkenyl)-sn-glycero-3-phosphoethanolamine
+%   1-acylglycerol-3P pool
+%   10-HETE
+%   11,12,15-THETA
+%   ...and 70 more.
+</code></pre>
+
+<p><img alt="multi-GSA heatmap" src="../img/GSAheatmap_multi.png" /></p>
+<p>Two heatmaps are produced: one showing the non-directional p-values (left), and one showing the distinct-direcitonal p-values (right). The distinct-directional p-values have been signed (+/-) after log-transformation, based on which direction (increase or decrease) was more significant.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>From the warning message, we see that some gene sets (metabolites) cannot be shown because they are not present in all GSA results across the different runs. This occurs because the different datasets each have a different gene list (usually due to filtering of low-count genes). When genes that are absent from the dataset are removed from the GSC in the pre-processing step, the gene set sizes may change and some gene sets may no longer satisfy the 20-200 range that was specified in the input.</p>
+</div>
               
             </div>
           </div>
