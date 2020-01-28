@@ -12,6 +12,10 @@ Gene set analysis (GSA) and visualization of results. This package was inspired 
 * `extractSubsystemGSC` - Extract subsystem gene sets from a genome-scale model.
 
 
+## [User guide](userguide.md)
+
+See the [user guide](userguide.md) for some examples on using GSAM.
+
 ## Citation
 
 _Manuscript in preparation._
