@@ -2,6 +2,7 @@ site_name: Gene Set Analysis Matlab
 nav:
   - Overview: index.md
   - User guide: userguide.md
+  - Metabolic gene sets: metgenesets.md
 theme:
   name: readthedocs
   highlightjs: true
