@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Metabolic gene sets - Gene Set Analysis Matlab</title>
+  <title>Visualization - Gene Set Analysis Matlab</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Metabolic gene sets";
-    var mkdocs_page_input_path = "metgenesets.md";
+    var mkdocs_page_name = "Visualization";
+    var mkdocs_page_input_path = "visualization.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -59,28 +59,30 @@
     <a class="" href="../userguide/">User guide</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../metgenesets/">Metabolic gene sets</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Metabolic gene sets</a>
+    <a class="current" href="./">Visualization</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#human-metabolic-gene-set-collections">Human metabolic gene set collections</a></li>
+    <li class="toctree-l2"><a href="#visualization">Visualization</a></li>
     
         <ul>
         
-            <li><a class="toctree-l3" href="#metabolite-gsc">Metabolite GSC</a></li>
+            <li><a class="toctree-l3" href="#colormaps">Colormaps</a></li>
         
-            <li><a class="toctree-l3" href="#subsystem-gsc">Subsystem GSC</a></li>
+            <li><a class="toctree-l3" href="#heatmap">Heatmap</a></li>
+        
+            <li><a class="toctree-l3" href="#heatscatter">Heatscatter</a></li>
         
         </ul>
     
 
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../visualization/">Visualization</a>
 	    </li>
           
         </ul>
@@ -105,7 +107,7 @@
     
       
     
-    <li>Metabolic gene sets</li>
+    <li>Visualization</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -115,13 +117,31 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="human-metabolic-gene-set-collections">Human metabolic gene set collections</h1>
-<p>GSAM enables the generation of gene set collections (GSCs) from genome-scale metabolic models (GEMs) using the <code>extractMetabliteGSC</code> or <code>extractSubsystemGSC</code> functions.</p>
-<p>For convenience, GSCs extracted from the latest version of the human genome-scale metabolic model <a href="https://github.com/SysBioChalmers/Human-GEM"><strong>Human-GEM</strong></a> are hosted on the <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/tree/master/gsc">GSAM GitHub repository</a> as <code>.gmt</code> files. This facilitates the use of Human-GEM-derived GSCs for use in other packages (e.g., <a href="https://bioconductor.org/packages/release/bioc/html/piano.html">Piano</a> or <a href="https://www.gsea-msigdb.org/gsea/index.jsp">GSEA</a>) without requiring GSAM or MATLAB.</p>
-<h2 id="metabolite-gsc">Metabolite GSC</h2>
-<p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/gsc/Human-GEM-metabolites.gmt"><code>Human-GEM-metabolites.gmt</code></a> file contains metabolite-gene associations extracted from Human-GEM, where each metabolite is a gene set. Each metabolite is associated with the genes encoding the reaction(s) involving that metabolite. Such a metabolite GSC is employed in the <a href="https://www.pnas.org/content/102/8/2685">reporter metabolite</a> approach.</p>
-<h2 id="subsystem-gsc">Subsystem GSC</h2>
-<p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/gsc/Human-GEM-subsystems.gmt"><code>Human-GEM-subsystems.gmt</code></a> file contains subsystem-gene associations extracted from Human-GEM, where each subsystem (metabolic pathway) is a gene set. Each subsystem is associated with the genes encoding the reaction(s) comprising that subsystem.</p>
+                <h1 id="visualization">Visualization</h1>
+<p>A few of the visualization functions in the GSAM package can be used for general purposes (i.e., unrelated to gene set analysis). These functions are described below.</p>
+<h2 id="colormaps">Colormaps</h2>
+<p>MATLAB does not always have the best color palettes (colormaps) available. We therefore provide the <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/custom_cmap.m"><code>custom_cmap</code></a> function to allow users to more easily create their own custom colormap, or to choose from several of our own pre-made custom colormaps.</p>
+<p>A preview of our built-in custom colormaps is available:</p>
+<pre><code class="matlab">custom_cmap('preview');
+</code></pre>
+
+<p><img alt="Custom colormaps" src="../img/custom_colormaps.png" /></p>
+<h2 id="heatmap">Heatmap</h2>
+<p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/genHeatMap.m"><code>genHeatMap</code></a> function generates a heatmap for a numeric matrix. The rows and/or columns can be optionally clustered/reordered based on a specified distance metric (e.g., Euclidean, cosine, spearman, etc.).</p>
+<pre><code class="matlab">data = randn(10, 30);  % create a matrix of random values for demonstration purposes
+genHeatMap(data);  % generate heatmap using all defaults
+
+</code></pre>
+
+<p><img alt="Example heatmap" src="../img/heatmap.png" /></p>
+<h2 id="heatscatter">Heatscatter</h2>
+<p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/genHeatScatter.m"><code>genHeatScatter</code></a> function generates a heatmap for <strong>two</strong> equally sized matrices, where one matrix defines the cell colors and the other matrix defines the cell sizes (cells are circles rather than squares). The rows and/or columns can be clustered based on the color matrix, the size matrix, or an average of the two matrices (after normalization).</p>
+<pre><code class="matlab">data = randn(10, 30);  % create a matrix of random values for demonstration purposes
+genHeatMap(data, data);  % generate heatscatter using same data for both size and color
+
+</code></pre>
+
+<p><img alt="Example heatscatter" src="../img/heatscatter.png" /></p>
               
             </div>
           </div>
@@ -129,10 +149,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../visualization/" class="btn btn-neutral float-right" title="Visualization">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../userguide/" class="btn btn-neutral" title="User guide"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../metgenesets/" class="btn btn-neutral" title="Metabolic gene sets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -158,10 +176,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../userguide/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../metgenesets/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../visualization/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
