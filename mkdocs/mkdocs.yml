@@ -3,6 +3,7 @@ nav:
   - Overview: index.md
   - User guide: userguide.md
   - Metabolic gene sets: metgenesets.md
+  - Visualization: visualization.md
 theme:
   name: readthedocs
   highlightjs: true
