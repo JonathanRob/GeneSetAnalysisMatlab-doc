@@ -4,9 +4,9 @@ The following examples demonstrate the use of the GSAM package for common analys
 
 The data files used for these examples can be retrieved from the `data/` directory on the associated [documentation repository](https://github.com/JonathanRob/GeneSetAnalysisMatlab-doc/tree/master/data). If you wish you run these examples yourself, first download the files in that directory to your local machine and ensure that they are on your current MATLAB path.
 
-## Example 1: Single GSA, Liver hepatocellular carcinoma
+## 1. Single GSA, Liver hepatocellular carcinoma
 
-### Load the data and gene set collection file
+### 1.1. Load the data and gene set collection file
 
 Load the differential expression (DE) results for hepatocellular carcinoma (LIHC) (paired-normal tissue vs. primary tumor tissue).
 ```matlab
@@ -65,7 +65,7 @@ gsc(1:5,:)
 	The `KEGG_custom_GSC.gmt` file used in this example is a modified version of the KEGG gene set collection retrieved from [MSigDB](http://software.broadinstitute.org/gsea/msigdb/genesets.jsp?collection=CP:KEGG), where all disease-related gene sets were removed.
 
 
-### Run the gene set analysis
+### 1.2. Run the gene set analysis
 
 Run the gene set analysis using the `geneSetAnalysis` function.
 ```matlab
@@ -86,7 +86,7 @@ Here, we chose the Wilcoxon rank-sum test as the method for combining gene-level
 	We used `geneNames` (instead of e.g. `geneIDs`) as input to the `geneSetAnalysis` function because gene names are used in the `gsc` that was loaded. It is important that the gene names or IDs in the gene list are of the same type as those used in the GSC file.
 
 
-### View and/or export the results
+### 1.3. View and/or export the results
 
 The results are returned as the `GSAres` table, which contains information about the size (number of genes) and significance (p-values, raw and adjusted) for each of the evaluated gene sets. The table can be viewed by double-clicking on `GSAres` in the Workspace, or using the `open` function.
 ```matlab
@@ -121,11 +121,11 @@ writetable(GSAres,'GSAresults.csv','Delimiter',',');  % export to comma-delimite
 ```
 
 
-## Example 2: Using gene set collections derived from GEMs
+## 2. Using gene set collections derived from GEMs
 
 Genome-scale metabolic models (GEMs) are convenient collections of all known reactions comprising the metabolism of an organism or cell type. Since most GEMs contain gene information, we can extract gene set collections from the associations of these genes with other model components, such as metabolites or subsystems (pathways).
 
-### Extract and use a metabolite-based GSC
+### 2.1. Extract and use a metabolite-based GSC
 
 For this example, we will use a human genome-scale metabolic model, Human-GEM. A `.mat` version of the model can be retrieved from the [Human-GEM GitHub repository](https://github.com/SysBioChalmers/Human-GEM/tree/master/ModelFiles/mat).
 
@@ -181,7 +181,7 @@ GSAheatmap(GSAres, true, 'top each', 10, 5);
 Note that we set the `colorMax` input to 5 to prevent the color range from autoscaling to the maximum -log10(p-value), resulting in very faint colors for most gene sets.
 
 
-### Extract and use a subsystem-based GSC
+### 2.2. Extract and use a subsystem-based GSC
 
 In the same way that a metabolite-based GSC can be extracted from a genome-scale model, we can generate a subsystem-based GSC:
 
@@ -217,7 +217,7 @@ GSAheatmap(GSAres, true, 'pval', 0.05, 5);
 ```
 
 
-## Example 3: Combining the results of multiple GSAs
+## 3. Combining the results of multiple GSAs
 
 In some cases we have multiple sets of p-values and fold-changes from multiple DE analyses, and may want to compare the GSA results among these data sets. Both the `geneSetAnalysis` and `GSAheatmap` functions allow input of multiple datasets or results.
 
@@ -244,7 +244,7 @@ fnames = strcat('DEresults_', cancer_types, '.txt');
 %     {'DEresults_STAD.txt'}
 ```
 
-### Run multiple GSAs separately and combine the results
+### 3.1. Run multiple GSAs separately and combine the results
 
 One approach is to run each GSA separately (e.g., in a for-loop), and then combine the results before calling the `GSAheatmap` function.
 
@@ -258,7 +258,7 @@ for i = 1:numel(fnames)
 end
 ```
 
-### Run multiple GSAs together in one function call
+### 3.2. Run multiple GSAs together in one function call
 
 Another approach is to first combine the datasets, and then supply the combined data to the `geneSetAnalysis` function.
 
@@ -303,7 +303,7 @@ GSAres = geneSetAnalysis(genes, PValue, logFC, gsc_met, 'Reporter', ...
 Note that in this second approach, we supplied the dataset names `cancer_types` as input to the `geneSetAnalysis` function.
 
 
-### Generate multi-GSA heatmaps
+### 3.3. Generate multi-GSA heatmaps
 
 Both the above approaches should yield essentially the same `GSAres` result (though not identical because of stochasticity). To visualize the results of the multiple GSAs in the same plot, the `GSAheatmap` function can be used.
 
