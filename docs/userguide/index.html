@@ -63,11 +63,11 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#example-1-single-gsa-liver-hepatocellular-carcinoma">Example 1: Single GSA, Liver hepatocellular carcinoma</a></li>
+            <li><a class="toctree-l3" href="#1-single-gsa-liver-hepatocellular-carcinoma">1. Single GSA, Liver hepatocellular carcinoma</a></li>
         
-            <li><a class="toctree-l3" href="#example-2-using-gene-set-collections-derived-from-gems">Example 2: Using gene set collections derived from GEMs</a></li>
+            <li><a class="toctree-l3" href="#2-using-gene-set-collections-derived-from-gems">2. Using gene set collections derived from GEMs</a></li>
         
-            <li><a class="toctree-l3" href="#example-3-combining-the-results-of-multiple-gsas">Example 3: Combining the results of multiple GSAs</a></li>
+            <li><a class="toctree-l3" href="#3-combining-the-results-of-multiple-gsas">3. Combining the results of multiple GSAs</a></li>
         
         </ul>
     
@@ -120,8 +120,8 @@
                 <h1 id="gsam-user-guide">GSAM User Guide</h1>
 <p>The following examples demonstrate the use of the GSAM package for common analysis scenarios.</p>
 <p>The data files used for these examples can be retrieved from the <code>data/</code> directory on the associated <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab-doc/tree/master/data">documentation repository</a>. If you wish you run these examples yourself, first download the files in that directory to your local machine and ensure that they are on your current MATLAB path.</p>
-<h2 id="example-1-single-gsa-liver-hepatocellular-carcinoma">Example 1: Single GSA, Liver hepatocellular carcinoma</h2>
-<h3 id="load-the-data-and-gene-set-collection-file">Load the data and gene set collection file</h3>
+<h2 id="1-single-gsa-liver-hepatocellular-carcinoma">1. Single GSA, Liver hepatocellular carcinoma</h2>
+<h3 id="11-load-the-data-and-gene-set-collection-file">1.1. Load the data and gene set collection file</h3>
 <p>Load the differential expression (DE) results for hepatocellular carcinoma (LIHC) (paired-normal tissue vs. primary tumor tissue).</p>
 <pre><code class="matlab">DEdata = readtable('DEresults_LIHC.txt');
 </code></pre>
@@ -175,7 +175,7 @@ gsc(1:5,:)
 <p class="admonition-title">Note</p>
 <p>The <code>KEGG_custom_GSC.gmt</code> file used in this example is a modified version of the KEGG gene set collection retrieved from <a href="http://software.broadinstitute.org/gsea/msigdb/genesets.jsp?collection=CP:KEGG">MSigDB</a>, where all disease-related gene sets were removed.</p>
 </div>
-<h3 id="run-the-gene-set-analysis">Run the gene set analysis</h3>
+<h3 id="12-run-the-gene-set-analysis">1.2. Run the gene set analysis</h3>
 <p>Run the gene set analysis using the <code>geneSetAnalysis</code> function.</p>
 <pre><code class="matlab">GSAres = geneSetAnalysis(geneNames, pvals, log2FC, gsc, 'Wilcoxon', 50000, [20, Inf]);
 
@@ -194,7 +194,7 @@ gsc(1:5,:)
 <p class="admonition-title">Important</p>
 <p>We used <code>geneNames</code> (instead of e.g. <code>geneIDs</code>) as input to the <code>geneSetAnalysis</code> function because gene names are used in the <code>gsc</code> that was loaded. It is important that the gene names or IDs in the gene list are of the same type as those used in the GSC file.</p>
 </div>
-<h3 id="view-andor-export-the-results">View and/or export the results</h3>
+<h3 id="13-view-andor-export-the-results">1.3. View and/or export the results</h3>
 <p>The results are returned as the <code>GSAres</code> table, which contains information about the size (number of genes) and significance (p-values, raw and adjusted) for each of the evaluated gene sets. The table can be viewed by double-clicking on <code>GSAres</code> in the Workspace, or using the <code>open</code> function.</p>
 <pre><code class="matlab">open('GSAres');
 </code></pre>
@@ -353,9 +353,9 @@ gsc(1:5,:)
 writetable(GSAres,'GSAresults.csv','Delimiter',',');  % export to comma-delimited .csv file
 </code></pre>
 
-<h2 id="example-2-using-gene-set-collections-derived-from-gems">Example 2: Using gene set collections derived from GEMs</h2>
+<h2 id="2-using-gene-set-collections-derived-from-gems">2. Using gene set collections derived from GEMs</h2>
 <p>Genome-scale metabolic models (GEMs) are convenient collections of all known reactions comprising the metabolism of an organism or cell type. Since most GEMs contain gene information, we can extract gene set collections from the associations of these genes with other model components, such as metabolites or subsystems (pathways).</p>
-<h3 id="extract-and-use-a-metabolite-based-gsc">Extract and use a metabolite-based GSC</h3>
+<h3 id="21-extract-and-use-a-metabolite-based-gsc">2.1. Extract and use a metabolite-based GSC</h3>
 <p>For this example, we will use a human genome-scale metabolic model, Human-GEM. A <code>.mat</code> version of the model can be retrieved from the <a href="https://github.com/SysBioChalmers/Human-GEM/tree/master/ModelFiles/mat">Human-GEM GitHub repository</a>.</p>
 <p>Once the <code>HumanGEM.mat</code> file is downloaded and added to the current working folder (or somewhere else on the MATLAB path), load it into MATLAB.</p>
 <pre><code class="matlab">load('HumanGEM.mat');  % the model is loaded as a structure named 'ihuman'
@@ -402,7 +402,7 @@ pvals     = DEdata.PValue;
 </code></pre>
 
 <p>Note that we set the <code>colorMax</code> input to 5 to prevent the color range from autoscaling to the maximum -log10(p-value), resulting in very faint colors for most gene sets.</p>
-<h3 id="extract-and-use-a-subsystem-based-gsc">Extract and use a subsystem-based GSC</h3>
+<h3 id="22-extract-and-use-a-subsystem-based-gsc">2.2. Extract and use a subsystem-based GSC</h3>
 <p>In the same way that a metabolite-based GSC can be extracted from a genome-scale model, we can generate a subsystem-based GSC:</p>
 <pre><code class="matlab">gsc_subsys = extractSubsystemGSC(ihuman);
 </code></pre>
@@ -430,7 +430,7 @@ subsystem_list(1:5)
 <pre><code class="matlab">GSAheatmap(GSAres, true, 'pval', 0.05, 5);
 </code></pre>
 
-<h2 id="example-3-combining-the-results-of-multiple-gsas">Example 3: Combining the results of multiple GSAs</h2>
+<h2 id="3-combining-the-results-of-multiple-gsas">3. Combining the results of multiple GSAs</h2>
 <p>In some cases we have multiple sets of p-values and fold-changes from multiple DE analyses, and may want to compare the GSA results among these data sets. Both the <code>geneSetAnalysis</code> and <code>GSAheatmap</code> functions allow input of multiple datasets or results.</p>
 <p>We will demonstrate two example approaches for running and comparing multiple GSAs which yield the same result. The examples will use the metabolite GSC from the Human-GEM model, and the "Reporter" method for combining statistics. Both approaches begin with the same steps of loading a GSC and specifying the list of dataset files:</p>
 <pre><code class="matlab">% extract a metabolite GSC (see Example 2 for more detail)
@@ -452,7 +452,7 @@ fnames = strcat('DEresults_', cancer_types, '.txt');
 %     {'DEresults_STAD.txt'}
 </code></pre>
 
-<h3 id="run-multiple-gsas-separately-and-combine-the-results">Run multiple GSAs separately and combine the results</h3>
+<h3 id="31-run-multiple-gsas-separately-and-combine-the-results">3.1. Run multiple GSAs separately and combine the results</h3>
 <p>One approach is to run each GSA separately (e.g., in a for-loop), and then combine the results before calling the <code>GSAheatmap</code> function.</p>
 <pre><code class="matlab">% load and analyze each dataset individually
 for i = 1:numel(fnames)
@@ -463,7 +463,7 @@ for i = 1:numel(fnames)
 end
 </code></pre>
 
-<h3 id="run-multiple-gsas-together-in-one-function-call">Run multiple GSAs together in one function call</h3>
+<h3 id="32-run-multiple-gsas-together-in-one-function-call">3.2. Run multiple GSAs together in one function call</h3>
 <p>Another approach is to first combine the datasets, and then supply the combined data to the <code>geneSetAnalysis</code> function.</p>
 <pre><code class="matlab">% load and combine datasets into cell arrays
 for i = 1:numel(fnames)
@@ -503,7 +503,7 @@ GSAres = geneSetAnalysis(genes, PValue, logFC, gsc_met, 'Reporter', ...
 </code></pre>
 
 <p>Note that in this second approach, we supplied the dataset names <code>cancer_types</code> as input to the <code>geneSetAnalysis</code> function.</p>
-<h3 id="generate-multi-gsa-heatmaps">Generate multi-GSA heatmaps</h3>
+<h3 id="33-generate-multi-gsa-heatmaps">3.3. Generate multi-GSA heatmaps</h3>
 <p>Both the above approaches should yield essentially the same <code>GSAres</code> result (though not identical because of stochasticity). To visualize the results of the multiple GSAs in the same plot, the <code>GSAheatmap</code> function can be used.</p>
 <p>Here we choose to show the top 10 most significant gene sets (metabolites) from each dataset, and to scale the colorbar to a maximum -log<sub>10</sub>(p-value) of 5.</p>
 <pre><code class="matlab">GSAheatmap(GSAres, true, 'top each', 10, 5);
