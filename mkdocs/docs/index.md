@@ -27,6 +27,7 @@ See the [user guide](userguide.md) for some examples on using GSAM.
 ### Additional functions
 * [`adjust_pvalues`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/adjust_pvalues.m) - Adjust p-values for false discovery rate (FDR) (used by `geneSetAnalysis`).
 * [`custom_cmap`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/custom_cmap.m) - Create or load a custom colormap (used by heatmap functions).
+* [`modifyOptSettings`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/modifyOptSettings.m) - Helper function for assigning optional parameters.
 
 ## Citation
 
