@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Metabolic gene sets - Gene Set Analysis Matlab</title>
+  <title>Installation - Gene Set Analysis Matlab</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Metabolic gene sets";
-    var mkdocs_page_input_path = "metgenesets.md";
+    var mkdocs_page_name = "Installation";
+    var mkdocs_page_input_path = "installation.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -54,9 +54,23 @@
     <a class="" href="..">Overview</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../installation/">Installation</a>
+    <a class="current" href="./">Installation</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#installing-gsam">Installing GSAM</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#1-download-gsam">1. Download GSAM</a></li>
+        
+            <li><a class="toctree-l3" href="#2-add-gsam-to-the-matlab-path">2. Add GSAM to the MATLAB PATH</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -64,23 +78,9 @@
     <a class="" href="../userguide/">User guide</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Metabolic gene sets</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#human-metabolic-gene-set-collections">Human metabolic gene set collections</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#metabolite-gsc">Metabolite GSC</a></li>
-        
-            <li><a class="toctree-l3" href="#subsystem-gsc">Subsystem GSC</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../metgenesets/">Metabolic gene sets</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -110,7 +110,7 @@
     
       
     
-    <li>Metabolic gene sets</li>
+    <li>Installation</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -120,13 +120,28 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="human-metabolic-gene-set-collections">Human metabolic gene set collections</h1>
-<p>GSAM enables the generation of gene set collections (GSCs) from genome-scale metabolic models (GEMs) using the <code>extractMetabliteGSC</code> or <code>extractSubsystemGSC</code> functions.</p>
-<p>For convenience, GSCs extracted from the latest version of the human genome-scale metabolic model <a href="https://github.com/SysBioChalmers/Human-GEM"><strong>Human-GEM</strong></a> are hosted on the <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/tree/master/gsc">GSAM GitHub repository</a> as <code>.gmt</code> files. This facilitates the use of Human-GEM-derived GSCs for use in other packages (e.g., <a href="https://bioconductor.org/packages/release/bioc/html/piano.html">Piano</a> or <a href="https://www.gsea-msigdb.org/gsea/index.jsp">GSEA</a>) without requiring GSAM or MATLAB.</p>
-<h2 id="metabolite-gsc">Metabolite GSC</h2>
-<p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/gsc/Human-GEM-metabolites.gmt"><code>Human-GEM-metabolites.gmt</code></a> file contains metabolite-gene associations extracted from Human-GEM, where each metabolite is a gene set. Each metabolite is associated with the genes encoding the reaction(s) involving that metabolite. Such a metabolite GSC is employed in the <a href="https://www.pnas.org/content/102/8/2685">reporter metabolite</a> approach.</p>
-<h2 id="subsystem-gsc">Subsystem GSC</h2>
-<p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/gsc/Human-GEM-subsystems.gmt"><code>Human-GEM-subsystems.gmt</code></a> file contains subsystem-gene associations extracted from Human-GEM, where each subsystem (metabolic pathway) is a gene set. Each subsystem is associated with the genes encoding the reaction(s) comprising that subsystem.</p>
+                <h1 id="installing-gsam">Installing GSAM</h1>
+<p>Installing GSAM consists of two steps: download the package and add it to the MATLAB PATH.</p>
+<h2 id="1-download-gsam">1. Download GSAM</h2>
+<h3 id="option-a-using-git-recommended">Option A: Using git (recommended)</h3>
+<p>Cloning the GitHub repository makes it easier to keep updated with the latest version.</p>
+<p>Open the terminal or command prompt and navigate to the directory where you would like to download GSAM.</p>
+<pre><code class="bash">cd mydirectory  # replace &quot;mydirectory&quot; with the path where you want to install
+
+git clone https://github.com/JonathanRob/GeneSetAnalysisMatlab.git
+</code></pre>
+
+<h3 id="option-b-download-directly-from-github">Option B: Download directly from GitHub</h3>
+<p>Navigate to the <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab">GSAM repository</a> and press the "Clone or download" button, then choose "Download ZIP". Download and unzip the file into the directory of your choice.</p>
+<h2 id="2-add-gsam-to-the-matlab-path">2. Add GSAM to the MATLAB PATH</h2>
+<p>Open MATLAB and add the GSAM directory to the path</p>
+<pre><code class="matlab">addpath('mydirectory/GeneSetAnalysisMatlab');  % replace &quot;mydirectory&quot; with actual location
+
+savepath;  % to avoid having to add the path every time you start MATLAB
+</code></pre>
+
+<p>That's it!</p>
+<p>Check out the <a href="../userguide/">User guide</a> for more instructions on using GSAM.</p>
               
             </div>
           </div>
@@ -134,10 +149,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../visualization/" class="btn btn-neutral float-right" title="Visualization">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../userguide/" class="btn btn-neutral float-right" title="User guide">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../userguide/" class="btn btn-neutral" title="User guide"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -163,10 +178,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../userguide/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../visualization/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../userguide/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
