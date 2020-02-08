@@ -105,11 +105,11 @@ open('GSAres');
 
 The tabular format of the GSA results can often be difficult to interpret. A more intuitive way to visualize the results is to use a heatmap. Generate a heatmap to visualize `GSAres` using the `GSAheatmap` function.
 ```matlab
-GSAheatmap(GSAres, true, 'pval', 0.01);
+GSAheatmap(GSAres, 'filterMethod', 'pval', 'filterThreshold', 0.01);
 ```
 ![LIHC GSA heatmap](img/GSAheatmap_LIHC.png)
 
-Here, we chose to use the adjusted gene-set p-values (as specified with the second input `true`), and filtered the gene sets to only show those with an adjusted p-value ≤ 0.01 for at least one of the five directionality types.
+By default, the `GSAheatmap` function will use the adjusted p-values. Here, we chose to filter the gene sets to only show those with an adjusted p-value ≤ 0.01 for at least one of the five directionality types.
 
 !!! note
 	For more information on the meaning and interpretation of the different p-value classes (distinct directional down and up, mixed-directinal down and up, and non-directional), see the [publication](https://www.ncbi.nlm.nih.gov/pubmed/23444143) where they were introduced. 
@@ -173,12 +173,12 @@ GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_met, 'Reporter', 50000, [20
 !!! important
 	Notice that we used the `geneIDs` here instead of `geneNames`. This is because the Human-GEM model by default uses gene Ensembl IDs, which means the `gsc_met` will also contain Ensembl IDs. Try running the GSA using `geneNames` instead - you should see an error.
 
-The results can again be visualized using the `GSAheatmap` function. Since a very large number of gene sets in this example exhibit a low p-value (e.g., < 0.001) we use the `top each` option to only include the top 10 most significant gene sets for each p-value type in the heatmap.
+The results can again be visualized using the `GSAheatmap` function. Since a very large number of gene sets in this example exhibit a low p-value (e.g., < 0.001) we use the `top each` filter method to only include the top 10 most significant gene sets for each column (p-value type) in the heatmap.
 ```matlab
-GSAheatmap(GSAres, true, 'top each', 10, 5);
+GSAheatmap(GSAres, 'filterMethod', 'top each', 'filterThreshold', 10, 'colorMax', 5);
 ```
 
-Note that we set the `colorMax` input to 5 to prevent the color range from autoscaling to the maximum -log10(p-value), resulting in very faint colors for most gene sets.
+Note that we set the `colorMax` input to 5 to prevent the color range from autoscaling to the maximum -log10(p-value), which would result in very faint colors for most gene sets.
 
 
 ### 2.2. Extract and use a subsystem-based GSC
@@ -213,7 +213,7 @@ GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_subsys, 'Reporter', 50000, 
 
 Visualize the results with a heatmap, filtering based on (adjusted) p-values.
 ```matlab
-GSAheatmap(GSAres, true, 'pval', 0.05, 5);
+GSAheatmap(GSAres, 'filterMethod', 'pval', 'filterThreshold', 0.05, 'colorMax', 5);
 ```
 
 
@@ -310,7 +310,7 @@ Both the above approaches should yield essentially the same `GSAres` result (tho
 Here we choose to show the top 10 most significant gene sets (metabolites) from each dataset, and to scale the colorbar to a maximum -log<sub>10</sub>(p-value) of 5.
 
 ```matlab
-GSAheatmap(GSAres, true, 'top each', 10, 5);
+GSAheatmap(GSAres, 'filterMethod', 'top each', 'filterThreshold', 10, 'colorMax', 5);
 
 % Warning! The following gene sets are not present in all GSAres tables and will therefore be ignored:
 % 	1,2-diacylglycerol-LD-SM pool
