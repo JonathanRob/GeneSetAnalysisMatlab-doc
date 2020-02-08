@@ -19,8 +19,8 @@ The [`genHeatMap`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/mas
 
 ```matlab
 data = randn(10, 30);  % create a matrix of random values for demonstration purposes
-genHeatMap(data);  % generate heatmap using all defaults
 
+genHeatMap(data);  % generate heatmap using all defaults
 ```
 ![Example heatmap](img/heatmap.png)
 
@@ -31,8 +31,8 @@ The [`genHeatScatter`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob
 
 ```matlab
 data = randn(10, 30);  % create a matrix of random values for demonstration purposes
-genHeatMap(data, data);  % generate heatscatter using same data for both size and color
 
+genHeatScatter(data, data);  % generate heatscatter using same data for both size and color
 ```
 ![Example heatscatter](img/heatscatter.png)
 
