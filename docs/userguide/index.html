@@ -344,11 +344,11 @@ gsc(1:5,:)
 </tbody>
 </table>
 <p>The tabular format of the GSA results can often be difficult to interpret. A more intuitive way to visualize the results is to use a heatmap. Generate a heatmap to visualize <code>GSAres</code> using the <code>GSAheatmap</code> function.</p>
-<pre><code class="matlab">GSAheatmap(GSAres, true, 'pval', 0.01);
+<pre><code class="matlab">GSAheatmap(GSAres, 'filterMethod', 'pval', 'filterThreshold', 0.01);
 </code></pre>
 
 <p><img alt="LIHC GSA heatmap" src="../img/GSAheatmap_LIHC.png" /></p>
-<p>Here, we chose to use the adjusted gene-set p-values (as specified with the second input <code>true</code>), and filtered the gene sets to only show those with an adjusted p-value ≤ 0.01 for at least one of the five directionality types.</p>
+<p>By default, the <code>GSAheatmap</code> function will use the adjusted p-values. Here, we chose to filter the gene sets to only show those with an adjusted p-value ≤ 0.01 for at least one of the five directionality types.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For more information on the meaning and interpretation of the different p-value classes (distinct directional down and up, mixed-directinal down and up, and non-directional), see the <a href="https://www.ncbi.nlm.nih.gov/pubmed/23444143">publication</a> where they were introduced. </p>
@@ -402,11 +402,11 @@ pvals     = DEdata.PValue;
 <p class="admonition-title">Important</p>
 <p>Notice that we used the <code>geneIDs</code> here instead of <code>geneNames</code>. This is because the Human-GEM model by default uses gene Ensembl IDs, which means the <code>gsc_met</code> will also contain Ensembl IDs. Try running the GSA using <code>geneNames</code> instead - you should see an error.</p>
 </div>
-<p>The results can again be visualized using the <code>GSAheatmap</code> function. Since a very large number of gene sets in this example exhibit a low p-value (e.g., &lt; 0.001) we use the <code>top each</code> option to only include the top 10 most significant gene sets for each p-value type in the heatmap.</p>
-<pre><code class="matlab">GSAheatmap(GSAres, true, 'top each', 10, 5);
+<p>The results can again be visualized using the <code>GSAheatmap</code> function. Since a very large number of gene sets in this example exhibit a low p-value (e.g., &lt; 0.001) we use the <code>top each</code> filter method to only include the top 10 most significant gene sets for each column (p-value type) in the heatmap.</p>
+<pre><code class="matlab">GSAheatmap(GSAres, 'filterMethod', 'top each', 'filterThreshold', 10, 'colorMax', 5);
 </code></pre>
 
-<p>Note that we set the <code>colorMax</code> input to 5 to prevent the color range from autoscaling to the maximum -log10(p-value), resulting in very faint colors for most gene sets.</p>
+<p>Note that we set the <code>colorMax</code> input to 5 to prevent the color range from autoscaling to the maximum -log10(p-value), which would result in very faint colors for most gene sets.</p>
 <h3 id="22-extract-and-use-a-subsystem-based-gsc">2.2. Extract and use a subsystem-based GSC</h3>
 <p>In the same way that a metabolite-based GSC can be extracted from a genome-scale model, we can generate a subsystem-based GSC:</p>
 <pre><code class="matlab">gsc_subsys = extractSubsystemGSC(ihuman);
@@ -432,7 +432,7 @@ subsystem_list(1:5)
 </code></pre>
 
 <p>Visualize the results with a heatmap, filtering based on (adjusted) p-values.</p>
-<pre><code class="matlab">GSAheatmap(GSAres, true, 'pval', 0.05, 5);
+<pre><code class="matlab">GSAheatmap(GSAres, 'filterMethod', 'pval', 'filterThreshold', 0.05, 'colorMax', 5);
 </code></pre>
 
 <h2 id="3-combining-the-results-of-multiple-gsas">3. Combining the results of multiple GSAs</h2>
@@ -511,7 +511,7 @@ GSAres = geneSetAnalysis(genes, PValue, logFC, gsc_met, 'Reporter', ...
 <h3 id="33-generate-multi-gsa-heatmaps">3.3. Generate multi-GSA heatmaps</h3>
 <p>Both the above approaches should yield essentially the same <code>GSAres</code> result (though not identical because of stochasticity). To visualize the results of the multiple GSAs in the same plot, the <code>GSAheatmap</code> function can be used.</p>
 <p>Here we choose to show the top 10 most significant gene sets (metabolites) from each dataset, and to scale the colorbar to a maximum -log<sub>10</sub>(p-value) of 5.</p>
-<pre><code class="matlab">GSAheatmap(GSAres, true, 'top each', 10, 5);
+<pre><code class="matlab">GSAheatmap(GSAres, 'filterMethod', 'top each', 'filterThreshold', 10, 'colorMax', 5);
 
 % Warning! The following gene sets are not present in all GSAres tables and will therefore be ignored:
 %   1,2-diacylglycerol-LD-SM pool

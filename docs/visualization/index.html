@@ -134,16 +134,16 @@
 <h2 id="heatmap">Heatmap</h2>
 <p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/genHeatMap.m"><code>genHeatMap</code></a> function generates a heatmap for a numeric matrix. The rows and/or columns can be optionally clustered/reordered based on a specified distance metric (e.g., Euclidean, cosine, spearman, etc.).</p>
 <pre><code class="matlab">data = randn(10, 30);  % create a matrix of random values for demonstration purposes
-genHeatMap(data);  % generate heatmap using all defaults
 
+genHeatMap(data);  % generate heatmap using all defaults
 </code></pre>
 
 <p><img alt="Example heatmap" src="../img/heatmap.png" /></p>
 <h2 id="heatscatter">Heatscatter</h2>
 <p>The <a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/genHeatScatter.m"><code>genHeatScatter</code></a> function generates a heatmap for <strong>two</strong> equally sized matrices, where one matrix defines the cell colors and the other matrix defines the cell sizes (cells are circles rather than squares). The rows and/or columns can be clustered based on the color matrix, the size matrix, or an average of the two matrices (after normalization).</p>
 <pre><code class="matlab">data = randn(10, 30);  % create a matrix of random values for demonstration purposes
-genHeatMap(data, data);  % generate heatscatter using same data for both size and color
 
+genHeatScatter(data, data);  % generate heatscatter using same data for both size and color
 </code></pre>
 
 <p><img alt="Example heatscatter" src="../img/heatscatter.png" /></p>
