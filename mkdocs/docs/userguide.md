@@ -69,7 +69,8 @@ gsc(1:5,:)
 
 Run the gene set analysis using the `geneSetAnalysis` function.
 ```matlab
-GSAres = geneSetAnalysis(geneNames, pvals, log2FC, gsc, 'Wilcoxon', 50000, [20, Inf]);
+GSAres = geneSetAnalysis(geneNames, pvals, log2FC, gsc, ...
+    'method', 'Wilcoxon', 'nPerm', 50000, 'gsSizeLim', [20, Inf]);
 
 % Gene set collection contains 146 gene sets and 4966 unique genes.
 % Checking for empty gene sets... Removed 0 empty sets.
@@ -80,7 +81,7 @@ GSAres = geneSetAnalysis(geneNames, pvals, log2FC, gsc, 'Wilcoxon', 50000, [20, 
 % Calculating test statistic... Done.
 % Calculating significance via gene shuffling... Done.
 ```
-Here, we chose the Wilcoxon rank-sum test as the method for combining gene-level statistics, set the number of permutations for significance calculation to 50000, and excluded gene sets that contained less than 20 genes.
+Here, we chose the Wilcoxon rank-sum test as the method for combining gene-level statistics, set the number of permutations for significance calculation to 50000, and excluded gene sets that contain less than 20 genes.
 
 !!! important
 	We used `geneNames` (instead of e.g. `geneIDs`) as input to the `geneSetAnalysis` function because gene names are used in the `gsc` that was loaded. It is important that the gene names or IDs in the gene list are of the same type as those used in the GSC file.
@@ -156,7 +157,8 @@ pvals     = DEdata.PValue;
 Run a GSA with the LIHC DE data, now using the metabolite GSC `gsc_met`.
 
 ```matlab
-GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_met, 'Reporter', 50000, [20, 200]);
+GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_met, ...
+    'method', 'Reporter', 'nPerm', 50000, 'gsSizeLim', [20, 200]);
 
 % Checking for empty gene sets... Removed 71 empty sets.
 % Checking for duplicated rows in GSC... Removed 0 duplicated rows.
@@ -208,7 +210,8 @@ subsystem_list(1:5)
 
 Run a GSA on the LIHC DE results with the same settings as above, but now using `gsc_subsys`.
 ```matlab
-GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_subsys, 'Reporter', 50000, [20, 200]);
+GSAres = geneSetAnalysis(geneIDs, pvals, log2FC, gsc_subsys, ...
+    'method', 'Reporter', 'nPerm', 50000, 'gsSizeLim', [20, 200]);
 ```
 
 Visualize the results with a heatmap, filtering based on (adjusted) p-values.
@@ -253,7 +256,7 @@ One approach is to run each GSA separately (e.g., in a for-loop), and then combi
 for i = 1:numel(fnames)
     DEdata = readtable(fnames{i});
     GSAres{i} = geneSetAnalysis(DEdata.gene_IDs, DEdata.PValue, DEdata.logFC, ...
-        gsc_met, 'Reporter', 10000, [20, 200]);
+        gsc_met, 'method', 'Reporter', 'nPerm', 10000, 'gsSizeLim', [20, 200]);
     GSAres{i}.Properties.Description = cancer_types{i};  % label the table as the cancer type
 end
 ```
@@ -272,8 +275,8 @@ for i = 1:numel(fnames)
 end
 
 % run the GSA
-GSAres = geneSetAnalysis(genes, PValue, logFC, gsc_met, 'Reporter', ...
-    10000, [20, 200], 'p', cancer_types);
+GSAres = geneSetAnalysis(genes, PValue, logFC, gsc_met, 'method', 'Reporter', ...
+    'nPerm', 10000, 'gsSizeLim', [20, 200], 'dataNames', cancer_types);
 
 
 % ##### Running GSA on COAD (run 1 of 4) #####
