@@ -18,6 +18,7 @@ See the [user guide](userguide.md) for some examples on using GSAM.
 * [`exportGSC`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/exportGSC.m) - Export a GSC to a .gmt or .txt file.
 * [`extractMetaboliteGSC`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/extractMetaboliteGSC.m) - Extract metabolite gene sets from a genome-scale model.
 * [`extractSubsystemGSC`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/extractSubsystemGSC.m) - Extract subsystem gene sets from a genome-scale model.
+* [`updateHumanGMTs`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/updateHumanGMTs.m) - Generate several `.gmt` files from Human-GEM model.
 
 ### Visualization of results
 * [`GSAheatmap`](https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/GSAheatmap.m) - Produce heatmap of single or multiple GSA results.
