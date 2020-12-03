@@ -7,13 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="None">
   
+  
   <link rel="shortcut icon" href="img/favicon.ico">
-  <title>Overview - Gene Set Analysis Matlab</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <title>Gene Set Analysis Matlab</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -24,8 +25,8 @@
   
   <script src="js/jquery-2.1.1.min.js" defer></script>
   <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/matlab.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/matlab.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,6 +37,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="." class="icon icon-home"> Gene Set Analysis Matlab</a>
         <div role="search">
@@ -46,53 +48,46 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href=".">Overview</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#gene-set-analysis-matlab-gsam">Gene Set Analysis Matlab (GSAM)</a></li>
-    
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href=".">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#user-guide">User guide</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#package-contents">Package contents</a>
         <ul>
-        
-            <li><a class="toctree-l3" href="#user-guide">User guide</a></li>
-        
-            <li><a class="toctree-l3" href="#package-contents">Package contents</a></li>
-        
-            <li><a class="toctree-l3" href="#citation">Citation</a></li>
-        
+    <li class="toctree-l3"><a class="reference internal" href="#run-a-gene-set-analysis-gsa">Run a gene set analysis (GSA)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gene-set-collection-gsc-importexport">Gene set collection (GSC) import/export</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#visualization-of-results">Visualization of results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#additional-functions">Additional functions</a>
+    </li>
         </ul>
-    
-
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="installation/">Installation</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="userguide/">User guide</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="metgenesets/">Metabolic gene sets</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="visualization/">Visualization</a>
-	    </li>
-          
-        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="installation/">Installation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="userguide/">User guide</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="metgenesets/">Metabolic gene sets</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="visualization/">Visualization</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -117,6 +112,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -138,6 +134,7 @@
 <li><a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/exportGSC.m"><code>exportGSC</code></a> - Export a GSC to a .gmt or .txt file.</li>
 <li><a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/extractMetaboliteGSC.m"><code>extractMetaboliteGSC</code></a> - Extract metabolite gene sets from a genome-scale model.</li>
 <li><a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/extractSubsystemGSC.m"><code>extractSubsystemGSC</code></a> - Extract subsystem gene sets from a genome-scale model.</li>
+<li><a href="https://github.com/JonathanRob/GeneSetAnalysisMatlab/blob/master/updateHumanGMTs.m"><code>updateHumanGMTs</code></a> - Generate several <code>.gmt</code> files from Human-GEM model.</li>
 </ul>
 <h3 id="visualization-of-results">Visualization of results</h3>
 <ul>
@@ -173,7 +170,7 @@
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -183,7 +180,7 @@
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -195,11 +192,16 @@
     <script>var base_url = '.';</script>
     <script src="js/theme.js" defer></script>
       <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 1.0.4
-Build Date UTC : 2020-02-09 12:28:54
+MkDocs version : 1.1
+Build Date UTC : 2020-12-03 10:28:11
 -->
